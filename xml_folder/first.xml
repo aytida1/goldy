@@ -1,6 +1,8 @@
 <mujoco>
   <asset>
-    <mesh name="bottom_plate" file="../stl_parts/bottom_plate.stl" scale="0.001 0.001 0.001"/>
+    <!-- adding scale of 1e-3 because its in mm but I want all values to be of meter -->
+    <mesh name="bottom_plate" file="../stl_parts/bottom_plate.stl" scale="0.001 0.001 0.001"/>  
+    <mesh name="leg" file="../stl_parts/leg.stl" scale="0.001 0.001 0.001"/>
     <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="100" height="100"/>
     <material name="grid" texture="grid" texrepeat="2 2" texuniform="true"
     reflectance=".2"/>
@@ -11,6 +13,10 @@
     <body>
       <freejoint/>
       <geom type="mesh" name="bottom_plate" pos="0 0 0" mesh="bottom_plate"/>
+      <body>
+        <geom type="mesh" name="leg1" pos="0.05 -0.01 0.01" axisangle="0 0 1 0" mesh="leg"/>
+        <joint type="hinge" name="leg_joint1" pos="0.05 -0.01 0.01" axis="0 1 0"/>
+      </body>
     </body>
   </worldbody>
 </mujoco>
