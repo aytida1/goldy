@@ -14,9 +14,25 @@
       <freejoint/>
       <geom type="mesh" name="bottom_plate" pos="0 0 0" mesh="bottom_plate"/>
       <body>
-        <geom type="mesh" name="leg1" pos="0.05 -0.01 0.01" axisangle="0 0 1 0" mesh="leg"/>
-        <joint type="hinge" name="leg_joint1" pos="0.05 -0.01 0.01" axis="0 1 0"/>
+        <geom type="mesh" name="leg1" pos="0.0477 -0.007 0.01" axisangle="0 0 1 0" mesh="leg"/>
+        <joint type="hinge" name="leg_joint1" pos="0.0477 -0.007 0.01" axis="0 1 0"/>
+      </body>
+      <body>
+        <geom type="mesh" name="leg2" pos="0.1327 -0.007 0.01" axisangle="0 0 1 0" mesh="leg"/>
+        <joint type="hinge" name="leg_joint2" pos="0.1327 -0.007 0.01" axis="0 1 0"/>
+      </body>
+      <body>
+        <geom type="mesh" name="leg3" pos="0.0477 0.067 0.01" axisangle="0 0 1 180" mesh="leg"/>
+        <joint type="hinge" name="leg_joint3" pos="0.0477 0.067 0.01" axis="0 1 0"/>
+      </body>
+      <body>
+        <geom type="mesh" name="leg4" pos="0.1327 0.067 0.01" axisangle="0 0 1 180" mesh="leg"/>
+        <joint type="hinge" name="leg_joint4" pos="0.1327 0.067 0.01" axis="0 1 0"/>
       </body>
     </body>
   </worldbody>
+
+  <actuator>
+    <position name="servo1" joint="leg_joint1" kp="0.1" kv=/>
+  </actuator>
 </mujoco>
