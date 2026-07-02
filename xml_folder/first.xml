@@ -1,4 +1,7 @@
 <mujoco>
+
+  <option timestep="0.001"/>
+
   <asset>
     <!-- adding scale of 1e-3 because its in mm but I want all values to be of meter -->
     <mesh name="bottom_plate" file="../stl_parts/bottom_plate.stl" scale="0.001 0.001 0.001"/>  
@@ -7,6 +10,14 @@
     <material name="grid" texture="grid" texrepeat="2 2" texuniform="true"
     reflectance=".2"/>
   </asset>
+  
+  <default>
+    <default class="sg90_servo_joint">
+      <!-- angle values are in degrees -->
+      <joint damping="0.07" frictionloss="0.01" armature="0.002" range="-90 90"/>
+    </default>
+  </default>
+
   <worldbody>
     <light pos="0 0 1" mode="trackcom"/>
     <geom name="ground" type="plane" pos="0 0 -.05" size="1.0 1.0 .1" material="grid" solimp=".99 .99 .01" solref=".001 1"/>
@@ -15,24 +26,28 @@
       <geom type="mesh" name="bottom_plate" pos="0 0 0" mesh="bottom_plate"/>
       <body>
         <geom type="mesh" name="leg1" pos="0.0477 -0.007 0.01" axisangle="0 0 1 0" mesh="leg"/>
-        <joint type="hinge" name="leg_joint1" pos="0.0477 -0.007 0.01" axis="0 1 0"/>
+        <joint type="hinge" class="sg90_servo_joint" name="leg_joint1" pos="0.0477 -0.007 0.01" axis="0 1 0"/>
       </body>
       <body>
         <geom type="mesh" name="leg2" pos="0.1327 -0.007 0.01" axisangle="0 0 1 0" mesh="leg"/>
-        <joint type="hinge" name="leg_joint2" pos="0.1327 -0.007 0.01" axis="0 1 0"/>
+        <joint type="hinge" class="sg90_servo_joint" name="leg_joint2" pos="0.1327 -0.007 0.01" axis="0 1 0"/>
       </body>
       <body>
         <geom type="mesh" name="leg3" pos="0.0477 0.067 0.01" axisangle="0 0 1 180" mesh="leg"/>
-        <joint type="hinge" name="leg_joint3" pos="0.0477 0.067 0.01" axis="0 1 0"/>
+        <joint type="hinge" class="sg90_servo_joint" name="leg_joint3" pos="0.0477 0.067 0.01" axis="0 1 0"/>
       </body>
       <body>
         <geom type="mesh" name="leg4" pos="0.1327 0.067 0.01" axisangle="0 0 1 180" mesh="leg"/>
-        <joint type="hinge" name="leg_joint4" pos="0.1327 0.067 0.01" axis="0 1 0"/>
+        <joint type="hinge" class="sg90_servo_joint" name="leg_joint4" pos="0.1327 0.067 0.01" axis="0 1 0"/>
       </body>
     </body>
   </worldbody>
 
   <actuator>
-    <position name="servo1" joint="leg_joint1" kp="0.1" kv=/>
+    <!-- angle values are in radians -->
+    <position name="servo1" joint="leg_joint1" kp="5.0" ctrlrange="-1.5708 1.5708" forcerange="-0.25 0.25"/>
+    <position name="servo2" joint="leg_joint2" kp="5.0" ctrlrange="-1.5708 1.5708" forcerange="-0.25 0.25"/>
+    <position name="servo3" joint="leg_joint3" kp="5.0" ctrlrange="-1.5708 1.5708" forcerange="-0.25 0.25"/>
+    <position name="servo4" joint="leg_joint4" kp="5.0" ctrlrange="-1.5708 1.5708" forcerange="-0.25 0.25"/>
   </actuator>
 </mujoco>
